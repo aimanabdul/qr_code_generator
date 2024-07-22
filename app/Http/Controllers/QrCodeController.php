@@ -30,7 +30,13 @@ class QrCodeController extends Controller
 
         for ($i = 0; $i < $quantity; $i++) {
             $label = Str::random(10);
-            $qrCode = QrCode::generate($label);
+            $url = "https://cardquest.be/qr/{$label}";
+
+            // generate qr code
+            $qrCode = QrCode::size(300)
+                ->errorCorrection('H')
+                ->generate($url);
+
 
             $qrCodeModel = new QrCodeModel();
             $qrCodeModel->label = $label;

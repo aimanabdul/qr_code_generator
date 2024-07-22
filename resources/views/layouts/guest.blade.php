@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="#" class="inline-block mr-10 text-indigo-600 font-bold">
-                            Card Quest
+                            QR code generator
                         </a>
                         <ul class="hidden lg:flex items-center gap-10">
                             <li><a href="{{route('qr.index')}}" class="text-gray-500 text-sm font-medium hover:text-gray-900 transition duration-200">All codes</a></li>
