@@ -5,7 +5,7 @@ use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('qr.index'));
 });
 
 Route::get('/qr/create', [QrCodeController::class, 'create'])->name('qr.create');

@@ -51,7 +51,7 @@ class QrCodeController extends Controller
 
     public function index()
     {
-        $qrCodes = QrCodeModel::all();
+        $qrCodes = QrCodeModel::paginate(25);
         return view('qr.index', compact('qrCodes'));
     }
 
