@@ -43,7 +43,7 @@ class QrCodeController extends Controller
             $qrCodeModel->status = false;
             $qrCodeModel->save();
 
-            Storage::put("public/qrcodes/{$qrCodeModel->id}.svg", $qrCode);
+            Storage::put("public/qrcodes/{$qrCodeModel->label}.svg", $qrCode);
         }
 
         return redirect()->route('qr.index');
@@ -59,7 +59,7 @@ class QrCodeController extends Controller
     {
         $qrCode = QrCodeModel::findOrFail($id);
 
-        $filePath = storage_path("app/public/qrcodes/{$id}.svg");
+        $filePath = storage_path("app/public/qrcodes/{$qrCode->label}.svg");
 
         if (!File::exists($filePath)) {
             abort(404);

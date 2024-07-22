@@ -20,7 +20,7 @@
                                 <td class="px-6 py-4 text-center">{{ $loop->index + 1 }}</td>
                                 <td class="px-6 py-4 text-center">{{ $qrCode->label }}</td>
                                 <td class="px-6 py-4 text-center flex justify-center">
-                                    <img src="{{ Storage::url('public/qrcodes/' . $qrCode->id . '.svg') }}" alt="qr code image" class="h-16">
+                                    <img src="{{ Storage::url('public/qrcodes/' . $qrCode->label . '.svg') }}" alt="qr code image" class="h-16">
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="h-6 w-6 rounded-full {{$qrCode->status ? 'bg-green-500' : 'bg-red-500'}}"></button>
