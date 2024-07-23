@@ -67,7 +67,7 @@
                     </button>
                 </div>
                 <ul class="flex flex-col gap-12 py-12">
-                    <li><a href="{{route('qr.index')}}" class="text-sm font-medium">All codes</a></li>
+                    <li><a href="{{route('qr.index')}}" class="text-sm font-medium">All</a></li>
                     <li><a href="{{route('qr.create')}}" class="text-sm font-medium">Generate</a></li>
                 </ul>
                 <div class="flex flex-col gap-10">

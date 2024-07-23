@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use App\Models\QrCodeModel;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+class QrCodeController extends Controller
+{
+    public function create()
+    {
+        return view('qr.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'quantity' => 'required|integer'
+        ]);
+
+        $quantity = $request->input('quantity');
+
+        for ($i = 0; $i < $quantity; $i++) {
+            $label = Str::random(10);
+            $url = "https://cardquest.be/qr/{$label}";
+
+            // Genereer een QR-code met de URL en versie 10
+            $result = Builder::create()
+                ->writer(new PngWriter())
+                ->data($url)
+                ->encoding(new Encoding('UTF-8'))
+                ->backgroundColor(new \Endroid\QrCode\Color\Color(0, 0, 0, 0))
+                ->size(300)
+                ->build();
+
+            $qrCodeModel = new QrCodeModel();
+            $qrCodeModel->label = $label;
+            $qrCodeModel->status = false;
+            $qrCodeModel->save();
+
+            Storage::put("public/qr_codes/{$qrCodeModel->label}.png", $result->getString());
+        }
+
+        return redirect()->route('qr.index');
+    }
+
+    public function index()
+    {
+        $qrCodes = QrCodeModel::paginate(25);
+        return view('qr.index', compact('qrCodes'));
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $labels = $request->input('labels');
+        QrCodeModel::whereIn('label', $labels)->update(['status' => true]);
+        return response()->json(['status' => 'success']);
+    }
+
+    public function download($id, $format)
+    {
+        $qrCode = QrCodeModel::findOrFail($id);
+
+        $filePath = storage_path("app/public/qr_codes/{$qrCode->label}.png");
+
+        if (!File::exists($filePath)) {
+            abort(404);
+        }
+
+        $qrCode->status = true;
+        $qrCode->save();
+
+        $fileName = "{$qrCode->label}.{$format}";
+
+        switch ($format) {
+            case 'png':
+                return response()->download($filePath, $fileName, ['Content-Type' => 'image/png']);
+            default:
+                abort(400);
+        }
+    }
+}
