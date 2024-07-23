@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mt-4" x-data="qrCodeTable()">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
             <h2 class="mb-4 text-gray-600 text-xl px-2">Alle QR codes</h2>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="overflow-x-auto">
@@ -27,7 +27,7 @@
                                 <td class="px-6 py-4 text-center">{{ $loop->index + 1 }}</td>
                                 <td class="px-6 py-4 text-center">{{ $qrCode->label }}</td>
                                 <td class="px-6 py-4 text-center flex justify-center {{$qrCode->foreground_color == 'white' ?? 'bg-black'}}">
-                                    <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-16 {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
+                                    <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-12 lg:h-16  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="h-6 w-6 rounded-full {{ $qrCode->is_downloaded ? 'bg-green-500' : 'bg-red-500' }}"></button>
