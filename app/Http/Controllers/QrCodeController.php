@@ -47,6 +47,7 @@ class QrCodeController extends Controller
             $qrCodeModel = new QrCodeModel();
             $qrCodeModel->label = $label;
             $qrCodeModel->foreground_color = $foregroundColor;
+            $qrCodeModel->background_color = $backgroundColor;
             $qrCodeModel->save();
 
             Storage::put("public/qr_codes/{$qrCodeModel->label}.png", $qrCode);

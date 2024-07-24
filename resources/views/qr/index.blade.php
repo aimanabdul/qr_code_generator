@@ -12,7 +12,8 @@
                             </th>
                             <th class="px-6 py-3">#</th>
                             <th class="px-6 py-3">Label</th>
-                            <th class="px-6 py-3">Qr code</th>
+                            <th class="px-6 py-3">Qr-code</th>
+                            <th class="px-6 py-3">Background</th>
                             <th class="px-6 py-3">Downloaded</th>
                             <th class="px-6 py-3">Business</th>
                             <th class="px-6 py-3">Used</th>
@@ -29,6 +30,7 @@
                                 <td class="px-6 py-4 text-center flex justify-center {{$qrCode->foreground_color == 'white' ?? 'bg-black'}}">
                                     <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-12 lg:h-16  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
                                 </td>
+                                <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->background_color) }}</td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="h-6 w-6 rounded-full {{ $qrCode->is_downloaded ? 'bg-green-500' : 'bg-red-500' }}"></button>
                                 </td>

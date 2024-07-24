@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('label');
             $table->string('foreground_color')->nullable();
+            $table->string('background_color')->nullable();
             $table->string('business_name')->nullable();
             $table->string('business_id')->nullable();
             $table->boolean('is_downloaded')->default(false);
