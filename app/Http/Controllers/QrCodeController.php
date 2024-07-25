@@ -50,6 +50,8 @@ class QrCodeController extends Controller
                 ->color(...$foregroundColorRgb)
                 ->backgroundColor(...$backgroundColorRgb)
                 ->errorCorrection('H')
+                ->eye('square')
+                ->style('dot', .9)
                 ->generate($url);
 
             $qrCodeModel = new QrCodeModel();
