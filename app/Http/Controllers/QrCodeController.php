@@ -37,7 +37,7 @@ class QrCodeController extends Controller
 
         for ($i = 0; $i < $quantity; $i++) {
             $label = Str::random(10);
-            $url = "https://cardquest.be/qr/{$label}";
+            $url = "https://qr.cardquest.be/qr/{$label}";
 
             // Stel de voorgrondkleur en achtergrondkleur in
             $foregroundColorRgb = ($foregroundColor === 'white') ? [255, 255, 255] : [0, 0, 0];
