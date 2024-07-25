@@ -14,9 +14,12 @@
                             <th class="px-6 py-3">Label</th>
                             <th class="px-6 py-3">Qr-code</th>
                             <th class="px-6 py-3">Background</th>
+                            <th class="px-6 py-3">Note</th>
+                            <th class="px-6 py-3">Forwarding</th>
                             <th class="px-6 py-3">Downloaded</th>
                             <th class="px-6 py-3">Business</th>
                             <th class="px-6 py-3">Used</th>
+                            <th class="px-6 py-3">Actions</th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-sm text-gray-600">
@@ -31,6 +34,8 @@
                                     <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-12 lg:h-16  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
                                 </td>
                                 <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->background_color) }}</td>
+                                <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->note) }}</td>
+                                <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->forwarding_link) }}</td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="h-6 w-6 rounded-full {{ $qrCode->is_downloaded ? 'bg-green-500' : 'bg-red-500' }}"></button>
                                 </td>
@@ -39,6 +44,9 @@
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="h-6 w-6 rounded-full {{ $qrCode->is_used ? 'bg-green-500' : 'bg-red-500' }}"></button>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <a href="{{route('qr.edit', $qrCode->id)}}">update</a>
                                 </td>
                             </tr>
                         @endforeach

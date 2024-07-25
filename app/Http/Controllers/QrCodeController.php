@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\File;
 
 class QrCodeController extends Controller
 {
+    public function index()
+    {
+        $qrCodes = QrCodeModel::paginate(25);
+        return view('qr.index', compact('qrCodes'));
+    }
+
     public function create()
     {
         return view('qr.create');
@@ -20,6 +26,7 @@ class QrCodeController extends Controller
     {
         $request->validate([
             'quantity' => 'required|integer',
+            'note' => 'required',
             'foreground_color' => 'required|string|in:black,white',
             'background_color' => 'required|string|in:white,transparent'
         ]);
@@ -46,6 +53,7 @@ class QrCodeController extends Controller
 
             $qrCodeModel = new QrCodeModel();
             $qrCodeModel->label = $label;
+            $qrCodeModel->note = $request->note;
             $qrCodeModel->foreground_color = $foregroundColor;
             $qrCodeModel->background_color = $backgroundColor;
             $qrCodeModel->save();
@@ -56,10 +64,29 @@ class QrCodeController extends Controller
         return redirect()->route('qr.index');
     }
 
-    public function index()
+    public function edit($id)
     {
-        $qrCodes = QrCodeModel::paginate(25);
-        return view('qr.index', compact('qrCodes'));
+        $qrCode = QrCodeModel::findOrFail($id);
+        return view('qr.edit', compact('qrCode' ));
+    }
+
+    public function update (Request $request, $id)
+    {
+        // validate request
+        $request->validate([
+            'forwarding_link' => 'required'
+        ]);
+
+        $qrCode = QrCodeModel::findOrFail($id);
+
+        // update and save qrCode
+        $qrCode->forwarding_link = $request->forwarding_link;
+        $qrCode->save();
+
+        session()->flash('success', 'QR-code successfully updated.');
+        return redirect()->back();
+
+
     }
 
     public function updateStatus(Request $request)
@@ -84,5 +111,22 @@ class QrCodeController extends Controller
 
         $fileName = "{$qrCode->label}.png";
         return response()->download($filePath, $fileName, ['Content-Type' => 'image/png']);
+    }
+
+
+    public function forwarding ($label)
+    {
+
+        $qrCode = QrCodeModel::where('label', '=', $label)->get()->first();
+
+        // check if qr code exists
+        if ($qrCode == null)
+        {
+            return view('qr.not_found');
+        }
+        else {
+            return redirect($qrCode->forwarding_link);
+        }
+
     }
 }

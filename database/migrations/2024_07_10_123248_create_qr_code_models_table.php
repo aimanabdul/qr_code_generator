@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('qr_code_models', function (Blueprint $table) {
             $table->id();
             $table->string('label');
+            $table->string('note');
             $table->string('foreground_color')->nullable();
             $table->string('background_color')->nullable();
             $table->string('business_name')->nullable();
             $table->string('business_id')->nullable();
+            $table->string('forwarding_link')->nullable();
             $table->boolean('is_downloaded')->default(false);
+            $table->boolean('is_printed')->default(false);
             $table->boolean('is_used')->default(false);
             $table->timestamps();
         });

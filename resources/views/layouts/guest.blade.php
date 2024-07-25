@@ -77,6 +77,7 @@
         </div>
     </div>
         <!-- Page Content -->
+        @include('layouts.alerts')
         <main>
             {{ $slot }}
         </main>

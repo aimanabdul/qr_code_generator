@@ -13,6 +13,9 @@ Route::post('/qr/store', [QrCodeController::class, 'store'])->name('qr.store');
 Route::get('/qr', [QrCodeController::class, 'index'])->name('qr.index');
 Route::get('/qr/download/{id}', [QrCodeController::class, 'download'])->name('qr.download');
 Route::post('/qr/update-status', [QrCodeController::class, 'updateStatus'])->name('qr.update-status');
+Route::get('/qr/update/{id}', [QrCodeController::class, 'edit'])->name('qr.edit');
+Route::post('/qr/update/{id}', [QrCodeController::class, 'update'])->name('qr.update');
+Route::get('/qr/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -7,6 +7,11 @@
                 <x-text-input id="quantity" class="block mt-1 w-full" type="number" name="quantity" :value="old('quantity')" min="1" required autofocus />
                 <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
             </div>
+            <div>
+                <x-input-label for="note" :value="__('Note')" />
+                <x-text-input id="note" name="note" class="block mt-1 w-full" type="text" :value="old('note')" required autofocus />
+                <x-input-error :messages="$errors->get('note')" class="mt-2" />
+            </div>
             <div class="mt-4">
                 <x-input-label for="foreground_color" :value="__('Foreground Color')" />
                 <select id="foreground_color" name="foreground_color" class="block mt-1 w-full">
