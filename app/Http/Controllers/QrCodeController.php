@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\QrCodeModel;
 use Illuminate\Support\Str;
@@ -125,7 +126,7 @@ class QrCodeController extends Controller
             return view('qr.not_found');
         }
         else {
-            return redirect($qrCode->forwarding_link);
+            return redirect()->away($qrCode->forwarding_link);
         }
 
     }
