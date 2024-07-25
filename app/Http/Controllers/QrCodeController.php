@@ -120,8 +120,8 @@ class QrCodeController extends Controller
 
         $qrCode = QrCodeModel::where('label', '=', $label)->get()->first();
 
-        // check if qr code exists
-        if ($qrCode == null)
+        // check if qr code exists en if forwarding link is set
+        if ($qrCode == null || $qrCode->forwarding_link == null)
         {
             return view('qr.not_found');
         }
