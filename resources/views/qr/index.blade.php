@@ -1,7 +1,20 @@
-<x-guest-layout>
+<x-app-layout>
     <div class="mt-4" x-data="qrCodeTable()">
         <div class="max-w-7xl mx-auto">
             <h2 class="mb-4 text-gray-600 text-xl px-2">Alle QR codes</h2>
+            <div class="mb-6">
+                <form action="{{route('qr.index')}}" class="flex">
+                    <div class="w-3/12 ">
+                        <x-text-input id="label" class="block mt-1 w-full" placeholder="Label" type="text" name="label" :value="$request->label ?? ''" autofocus />
+                        <x-input-error :messages="$errors->get('label')" class="mt-2" />
+                    </div>
+                    <div class=" items-center mt-4 w-full">
+                        <x-primary-button class="ms-3">
+                            {{ __('Search') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+            </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="overflow-x-auto">
                     <table class="table-auto min-w-full divide-y divide-gray-200">
@@ -14,6 +27,7 @@
                             <th class="px-6 py-3">Label</th>
                             <th class="px-6 py-3">Qr-code</th>
                             <th class="px-6 py-3">Background</th>
+                            <th class="px-6 py-3">Foreground</th>
                             <th class="px-6 py-3">Note</th>
                             <th class="px-6 py-3">Forwarding</th>
                             <th class="px-6 py-3">Downloaded</th>
@@ -34,6 +48,7 @@
                                     <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-12 lg:h-16  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
                                 </td>
                                 <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->background_color) }}</td>
+                                <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->foreground_color) }}</td>
                                 <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->note) }}</td>
                                 <td class="px-6 py-4 text-center">{{ ucfirst($qrCode->forwarding_link) }}</td>
                                 <td class="px-6 py-4 text-center">
@@ -96,4 +111,4 @@
             };
         }
     </script>
-</x-guest-layout>
+</x-app-layout>

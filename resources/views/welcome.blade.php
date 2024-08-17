@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <section class="py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap -m-4">
@@ -22,4 +22,4 @@
             </div>
         </div>
     </section>
-</x-guest-layout>
+</x-app-layout>

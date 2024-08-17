@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\QrCodeModel;
 use Illuminate\Support\Str;
@@ -12,13 +13,21 @@ use Illuminate\Support\Facades\File;
 
 class QrCodeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $qrCodes = QrCodeModel::paginate(25);
+
+        if($request->has('label'))
+        {
+            $qrCodes = QrCodeModel::where('label', 'like', '%'. $request->label . '%')
+                ->paginate(25);
+        }
+        else{
+            $qrCodes = QrCodeModel::paginate(25);
+        }
         return view('qr.index', compact('qrCodes'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('qr.create');
     }

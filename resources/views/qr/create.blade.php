@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <div class="max-w-2xl m-auto mt-8 p-4">
         <form method="POST" action="{{ route('qr.store') }}">
             @csrf
@@ -35,4 +35,4 @@
             </div>
         </form>
     </div>
-</x-guest-layout>
+</x-app-layout>

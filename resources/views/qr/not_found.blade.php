@@ -88,7 +88,7 @@
         <p class="p-a">
             . The page you were looking for could not be found</p>
         <p class="p-b">
-            Greetings from <a href='https://futurewise.be' class="back">futurewise.be</a>
+            Greetings from <a href='https://cardquest.be' class="back">cardquest.be</a>
         </p>
 
     </div>
