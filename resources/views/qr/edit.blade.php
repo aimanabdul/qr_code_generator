@@ -9,23 +9,21 @@
             <h4 class="text-sm text-gray-600">{{$qrCode->label}}</h4>
         </div>
         <div>
-            @if(!$qrCode->business_id)
-                <button class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-400 mb-2" id="openPlaceIdModal">
-                    FIND
-                </button>
-            @endif
+            <button class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-400 mb-8" id="openPlaceIdModal">
+                FIND PLACE ID
+            </button>
             <h2 class="text-gray-700 text-xl font-bold">Business Info</h2>
             <p>
-                <span>Naam:</span> <span id="placeNameDisplay">{{$qrCode->business_name ?? ''}}<!-- data from placeIdForm here --></span>
+                <span class="font-bold">Naam:</span> <span id="placeNameDisplay" class="text-gray-600">{{$qrCode->business_name ?? ''}}<!-- data from placeIdForm here --></span>
             </p>
             <p>
-                <span>Address:</span> <span id="placeAddressDisplay">{{$qrCode->address ?? ''}}<!-- data from placeIdForm here --></span>
+                <span class="font-bold">Address:</span> <span id="placeAddressDisplay" class="text-gray-600">{{$qrCode->address ?? ''}}<!-- data from placeIdForm here --></span>
             </p>
             <p>
-                <span>ID:</span> <span id="placeIdDisplay">{{$qrCode->business_id ?? ''}}<!-- data from placeIdForm here --></span>
+                <span class="font-bold">ID:</span> <span id="placeIdDisplay" class="text-gray-600">{{$qrCode->business_id ?? ''}}<!-- data from placeIdForm here --></span>
             </p>
             <p>
-                <span>Review Link:</span> <span id="reviewLinkDisplay">{{$qrCode->forwarding_link ?? ''}}<!-- data from placeIdForm here --></span>
+                <span class="font-bold">Review Link:</span> <span id="reviewLinkDisplay" class="text-gray-600">{{$qrCode->forwarding_link ?? ''}}<!-- data from placeIdForm here --></span>
             </p>
 
             <!-- Modal for placeIdForm -->
@@ -52,19 +50,17 @@
                 </div>
             </div>
         </div>
-        @if(!$qrCode->business_id)
-            <form method="POST" action="{{ route('qr.update', $qrCode->id) }}" class="w-full" id="updateForm">
-                @csrf
-                <div class="flex items-center gap-4 mt-4 w-full">
-                    <input type="text" id="place_name" name="place_name" class="hidden">
-                    <input type="text" id="place_address" name="place_address" class="hidden">
-                    <input type="text" id="place_id" name="place_id" class="hidden" />
-                    <x-primary-button class="">
-                        {{ __('Save') }}
-                    </x-primary-button>
-                </div>
-            </form>
-        @endif
+        <form method="POST" action="{{ route('qr.update', $qrCode->id) }}" class="w-full" id="updateForm">
+            @csrf
+            <div class="flex items-center gap-4 mt-4 w-full">
+                <input type="text" id="place_name" name="place_name" class="hidden">
+                <input type="text" id="place_address" name="place_address" class="hidden">
+                <input type="text" id="place_id" name="place_id" class="hidden" />
+                <x-primary-button class="">
+                    {{ __('Save') }}
+                </x-primary-button>
+            </div>
+        </form>
     </div>
 
     @section('extra_scripts')

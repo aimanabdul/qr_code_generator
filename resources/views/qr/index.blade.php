@@ -22,7 +22,6 @@
                         <th class="px-6 py-3">
                             <input type="checkbox" x-model="selectAll" @click="toggleAll">
                         </th>
-                        <th class="px-6 py-3">#</th>
                         <th class="px-6 py-3">Label</th>
                         <th class="px-6 py-3">Qr-code</th>
                         <th class="px-6 py-3">Background</th>
@@ -39,7 +38,6 @@
                             <td class="px-6 py-4 text-center">
                                 <input type="checkbox" x-model="selected" value="{{ $qrCode->label }}">
                             </td>
-                            <td class="px-6 py-4 text-center">{{ $loop->index + 1 }}</td>
                             <td class="px-6 py-4 text-center">{{ $qrCode->label }}</td>
                             <td class="px-6 py-4 text-center flex justify-center {{$qrCode->foreground_color == 'white' ?? 'bg-black'}}">
                                 <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-12 lg:h-16  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
