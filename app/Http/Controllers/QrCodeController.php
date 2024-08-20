@@ -84,15 +84,21 @@ class QrCodeController extends Controller
 
     public function update (Request $request, $id)
     {
+
         // validate request
-        $request->validate([
-            'forwarding_link' => 'required'
-        ]);
+        if (!$request->place_name || !$request->place_address || !$request->place_id)
+        {
+            session()->flash('danger', 'Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
 
         $qrCode = QrCodeModel::findOrFail($id);
 
         // update and save qrCode
-        $qrCode->forwarding_link = $request->forwarding_link;
+        $qrCode->business_name = $request->input('place_name');
+        $qrCode->address = $request->input('place_address');
+        $qrCode->business_id = $request->input('place_id');
+        $qrCode->forwarding_link = "Https://search.google.com/local/writereview?placeid=" . $request->input('place_id');
         $qrCode->save();
 
         session()->flash('success', 'QR-code successfully updated.');

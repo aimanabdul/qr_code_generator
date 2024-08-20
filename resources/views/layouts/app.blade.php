@@ -10,6 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    @yield('extra_head')
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -78,8 +79,10 @@
 </div>
 <!-- Page Content -->
 @include('layouts.alerts')
-<main class="flex justify-center">
+<main>
     {{ $slot }}
 </main>
+
+@yield('extra_scripts')
 </body>
 </html>
