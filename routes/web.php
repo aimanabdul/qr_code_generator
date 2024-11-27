@@ -24,6 +24,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/qr/update-status', [QrCodeController::class, 'updateStatus'])->name('qr.update-status');
     Route::get('/qr/update/{id}', [QrCodeController::class, 'edit'])->name('qr.edit');
     Route::post('/qr/update/{id}', [QrCodeController::class, 'update'])->name('qr.update');
+
+    // set up
+    Route::get('/qr/setup/{label}', [QrCodeController::class, 'setup'])->name('qr.setup');
+    Route::post('/qr/setup/{label}', [QrCodeController::class, 'activate'])->name('qr.activate');
+
+
 });
 
 // profile

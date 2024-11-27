@@ -104,7 +104,6 @@ class QrCodeController extends Controller
         session()->flash('success', 'QR-code successfully updated.');
         return redirect()->back();
 
-
     }
 
     public function updateStatus(Request $request)
@@ -146,5 +145,50 @@ class QrCodeController extends Controller
             return redirect()->away($qrCode->forwarding_link);
         }
 
+    }
+
+
+    public function setup (Request $request, $label)
+    {
+        $qrCode = QrCodeModel::where('label', '=', $label)->get()->first();
+        // if qr code does not exist
+        if ($qrCode == null)
+        {
+            return ("qr code does not exist");
+        }
+
+        // if forwarding link does exist
+        if ($qrCode->forwarding_link    )
+        {
+            return ("Qr Code in use!");
+        }
+        else
+        {
+            return view('qr.setup', compact('qrCode'));
+        }
+
+    }
+
+
+    public function activate (Request $request, $id)
+    {
+        // validate request
+        if (!$request->place_name || !$request->place_address || !$request->place_id)
+        {
+            session()->flash('danger', 'Something went wrong. Please try again later.');
+            return redirect()->back();
+        }
+
+        $qrCode = QrCodeModel::findOrFail($id);
+
+        // update and save qrCode
+        $qrCode->business_name = $request->input('place_name');
+        $qrCode->address = $request->input('place_address');
+        $qrCode->business_id = $request->input('place_id');
+        $qrCode->forwarding_link = "Https://search.google.com/local/writereview?placeid=" . $request->input('place_id');
+        $qrCode->save();
+
+        session()->flash('success', 'QR-code successfully updated.');
+        return view("qr.activate_success");
     }
 }
