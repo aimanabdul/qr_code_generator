@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="max-w-2xl m-auto mt-8 p-4">
+        <h1 class="text-3xl font-bold mb-8 text-gray-700">New QR Codes</h1>
         <form method="POST" action="{{ route('qr.store') }}">
             @csrf
             <div>

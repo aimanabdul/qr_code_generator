@@ -26,7 +26,7 @@
                     </a>
                     <ul class="hidden lg:flex items-center gap-10">
                         <li><a href="{{route('qr.index')}}" class="text-gray-500 text-sm font-medium hover:text-gray-900 transition duration-200">All codes</a></li>
-                        <li><a href="{{route('qr.create')}}" class="text-gray-500 text-sm font-medium hover:text-gray-900 transition duration-200">Generate</a></li>
+                        <li><a href="{{route('qr.hell')}}" class="text-gray-500 text-sm font-medium hover:text-gray-900 transition duration-200">Generate</a></li>
                     </ul>
                 </div>
                 <div class="hidden lg:flex gap-10">
@@ -62,7 +62,7 @@
             </div>
             <ul class="flex flex-col gap-12 py-12">
                 <li><a href="{{route('qr.index')}}" class="text-sm font-medium">All</a></li>
-                <li><a href="{{route('qr.create')}}" class="text-sm font-medium">Generate</a></li>
+                <li><a href="{{route('qr.hell')}}" class="text-sm font-medium">Generate</a></li>
             </ul>
             <div class="flex flex-col gap-10">
                 <a href="#" class="group">

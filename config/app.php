@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    Google api key
+    */
+    'google_api_public_key' => env('GOOGLE_API_PUBLIC_KEY', null),
+
 ];

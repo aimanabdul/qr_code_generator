@@ -1,9 +1,10 @@
-<x-app-layout>
+<x-guest-layout>
     @section('extra_head')
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAArrPWnROsdtg4yGLLNC9npQVwbvEcz88&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_api_public_key')}}=places"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @endsection
-    <div class="mt-6 flex flex-col lg:flex-row justify-center space-x-12">
+    @include('layouts.alerts')
+    <div class="mt-6 flex flex-col justify-center">
         <div class="mb-6 flex justify-center">
             <img src="{{ Storage::url('public/qr_codes/' . $qrCode->label . '.png') }}" alt="qr code image" class="h-36 lg:h-64  {{$qrCode->foreground_color == 'white' ? 'bg-black' : ''}}">
 
@@ -12,13 +13,18 @@
         <div>
             <!-- open modal -->
             <div>
-                <h2 class="text-gray-600 text-xl font-bold">Stap 1: Zoek uw organisatie met Google Place Finder.</h2>
-                <button class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-400 mb-4" id="openPlaceIdModal">
-                    Google Place Finder
+                <h2 class="text-gray-600 text-xl font-bold">{{__("Stap 1: U Google profile ophalen")}}</h2>
+                <button class=" text-gray-800 border border-gray-800 py-1 px-4 rounded hover:bg-gray-800 hover:text-white mb-4" id="openPlaceIdModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 inline-block">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                    <span>Zoeken</span>
                 </button>
             </div>
-
-            <div class="text-gray-600">
+            <h2 class="text-gray-700">{{(__("Uw profiel:"))}}</h2>
+            <div class="text-gray-600 border p-2 shadow-sm bg-slate-50">
+                
                 <p>
                     <span class="">Naam:</span> <span id="placeNameDisplay" class="text-gray-600 font-semibold">{{$qrCode->business_name ?? ''}}<!-- data from placeIdForm here --></span>
                 </p>
@@ -27,25 +33,27 @@
                 </p>
             </div>
 
-            <div>
-                <h2 class="text-gray-600 text-xl font-bold mt-8">Stap 2: Geef het emailadres waarmee u besteld hebt.</h2>
-                <input type="email" id="email" name="email" class="rounded border border-gray-300">
-            </div>
-
-            <h2 class="text-gray-600 text-xl font-bold mt-8">Stap 3: Bevestig uw gegevens.</h2>
-            <form method="POST" action="{{ route('qr.activate', $qrCode->id) }}" class="w-full mb-8" id="updateForm">
+            <form method="POST" action="{{ route('qr.activateByCustomer', $qrCode->id) }}" class="w-full my-8" id="updateForm">
                 @csrf
-                <div class="flex items-center gap-4 w-full">
+                <div class="w-full">
+                    <div>
+                        <h2 class="text-gray-600 text-xl font-bold mt-8">{{__("Stap 2: Geef uw activatiecode in")}}</h2>
+                        <input type="text" id="activation_code" name="activation_code" value="{{old('activation_code')}}" class="rounded border border-gray-300">
+                        <x-input-error :messages="$errors->get('activation_code')" class="mt-2" />
+                        <p class="text-gray-500 text-sm mt-2">U kan de activatiecode vinden in de email die u ontvangen heeft.</p>
+                    </div>
                     <input type="text" id="place_name" name="place_name" class="hidden">
                     <input type="text" id="place_address" name="place_address" class="hidden">
                     <input type="text" id="place_id" name="place_id" class="hidden" />
-                    <x-primary-button class="bg-blue-500">
-                        {{ __('Gegevens bevestigen') }}
-                    </x-primary-button>
+                    <button type="submit" class="bg-green-500 text-white py-2 px-5 rounded hover:bg-green-400 mt-6">
+                        {{ __('Bevestigen') }}
+                    </button>
                 </div>
             </form>
 
-            <p>Let op! Kunt u uw organisatie niet terugvinden met Google Place Finder? Stuur ons gerust een mailtje en we zullen u verder helpen.</p>
+            <div role="alert" class="mt-3 relative flex w-full p-3 text-sm text-slate-600 rounded-md bg-slate-100">
+                <p>Kunt u uw organisatie niet terugvinden met Google Place Finder? Stuur ons gerust een mailtje en we zullen u verder helpen.</p>
+            </div>
         </div>
     </div>
 
@@ -124,4 +132,4 @@
             });
         </script>
     @endsection
-</x-app-layout>
+</x-guest-layout>
