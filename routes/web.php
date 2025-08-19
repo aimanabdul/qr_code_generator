@@ -5,7 +5,7 @@ use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Route;
 
 // forwarding
-Route::get('/qr/forwarding/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
+Route::get('/qr/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
 Route::post('/qr/activate-by-customer/{id}', [QrCodeController::class, 'activateBycustomer'])->name('qr.activateByCustomer');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

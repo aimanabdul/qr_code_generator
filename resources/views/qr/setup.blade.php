@@ -26,7 +26,7 @@
             <div class="text-gray-600 border p-2 shadow-sm bg-slate-50">
                 
                 <p>
-                    <span class="">Naam:</span> <span id="placeNameDisplay" class="text-gray-600 font-semibold">{{$qrCode->business_name ?? ''}}<!-- data from placeIdForm here --></span>
+                    <span class="">Naam:</span> <span id="placeNameDisplay" class="text-gray-600 font-semibold">{{old('place_name')}}<!-- data from placeIdForm here --></span>
                 </p>
                 <p>
                     <span class="">Address:</span> <span id="placeAddressDisplay" class="text-gray-600 font-semibold">{{$qrCode->address ?? ''}}<!-- data from placeIdForm here --></span>
