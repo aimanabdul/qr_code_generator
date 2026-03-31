@@ -4,10 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Route;
 
-// forwarding
-Route::get('/qr/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
+
+// forwarding => the forwarding route shoul always be qr/label/{qrlabel} otherwaise all the qr/* won't work
+Route::get('/qr/label/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
 Route::post('/qr/activate-by-customer/{id}', [QrCodeController::class, 'activateBycustomer'])->name('qr.activateByCustomer');
 
+
+// authenticated and verified user's routes
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return redirect(route('qr.index'));
@@ -19,7 +22,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('dashboard');
 
     // qr codes
-    Route::get('/qr/create', [QrCodeController::class, 'create'])->name('qr.hell');
+    Route::get('/qr/create', [QrCodeController::class, 'create'])->name('qr.create');
     Route::post('/qr/store', [QrCodeController::class, 'store'])->name('qr.store');
     Route::get('/qr', [QrCodeController::class, 'index'])->name('qr.index');
     Route::get('/qr/download/{id}', [QrCodeController::class, 'download'])->name('qr.download');
