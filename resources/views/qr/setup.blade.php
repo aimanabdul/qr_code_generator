@@ -1,6 +1,6 @@
 <x-guest-layout>
     @section('extra_head')
-        <script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_api_public_key')}}=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_api_public_key')}}&libraries=places"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @endsection
     @include('layouts.alerts')

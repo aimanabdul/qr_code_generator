@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('extra_head')
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ config("app.google_api_public_key") }}=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.google_api_public_key') }}&libraries=places"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @endsection
     <div class="mt-6 mx-4 w-full md:max-w-3xl md:mx-auto">
@@ -99,6 +99,7 @@
                 const placeNameInput = $('#place_name');
                 const placeAddressInput = $('#place_address');
                 const placeIdInput = $('#place_id');
+                console.log('helllo');
                 const autocomplete = new google.maps.places.Autocomplete(searchPlaceNameInput[0]);
 
                 autocomplete.addListener('place_changed', function() {

@@ -82,7 +82,6 @@
 <main>
     {{ $slot }}
 </main>
-
 @yield('extra_scripts')
 </body>
 </html>
