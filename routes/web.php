@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // forwarding => the forwarding route shoul always be qr/label/{qrlabel} otherwaise all the qr/* won't work
-Route::get('/qr/label/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding');
+Route::get('/qr/{label}', [QrCodeController::class, 'forwarding'])->name('qr.forwarding'); // Do not change: This route is reserved for forwarding and should never be changed!
 Route::post('/qr/activate-by-customer/{id}', [QrCodeController::class, 'activateBycustomer'])->name('qr.activateByCustomer');
 
 
