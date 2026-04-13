@@ -22,14 +22,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('dashboard');
 
     // qr codes
-    Route::get('/qr/create', [QrCodeController::class, 'create'])->name('qr.create');
-    Route::post('/qr/store', [QrCodeController::class, 'store'])->name('qr.store');
-    Route::get('/qr', [QrCodeController::class, 'index'])->name('qr.index');
-    Route::get('/qr/download/{id}', [QrCodeController::class, 'download'])->name('qr.download');
-    Route::post('/qr/update-status', [QrCodeController::class, 'updateStatus'])->name('qr.update-status');
-    Route::get('/qr/update/{id}', [QrCodeController::class, 'edit'])->name('qr.edit');
-    Route::post('/qr/update/{id}', [QrCodeController::class, 'update'])->name('qr.update');
-    Route::get('/qr/getactivationcode/{id}', [QrCodeController::class, 'getActivationCode'])->name('qr.getActivationCode');
+    Route::get('/qrcode/create', [QrCodeController::class, 'create'])->name('qr.create');
+    Route::post('/qrcode/store', [QrCodeController::class, 'store'])->name('qr.store');
+    Route::get('/qrcode', [QrCodeController::class, 'index'])->name('qr.index');
+    Route::get('/qrcode/download/{id}', [QrCodeController::class, 'download'])->name('qr.download');
+    Route::post('/qrcode/update-status', [QrCodeController::class, 'updateStatus'])->name('qr.update-status');
+    Route::get('/qrcode/update/{id}', [QrCodeController::class, 'edit'])->name('qr.edit');
+    Route::post('/qrcode/update/{id}', [QrCodeController::class, 'update'])->name('qr.update');
+    Route::get('/qrcode/getactivationcode/{id}', [QrCodeController::class, 'getActivationCode'])->name('qr.getActivationCode');
 
     // set up
     Route::get('/qr/setup/{label}', [QrCodeController::class, 'setup'])->name('qr.setup');
